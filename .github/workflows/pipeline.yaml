@@ -2,7 +2,7 @@ on:
   repository_dispatch:
     types: [trigger-release]
 jobs:
-  name: Release ${{ github.event.client_payload.ref }}
+  name: Do release
   steps:
     - uses: actions/checkout@v2
     - run: |
