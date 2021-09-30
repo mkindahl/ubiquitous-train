@@ -2,11 +2,16 @@ on:
   repository_dispatch:
     types: [trigger-release]
 jobs:
-  name: Do release
-  steps:
-    - uses: actions/checkout@v2
-    - run: |
-        echo GITHUB_REF: $GITHUB_REF
-        echo client_payload: ${{ github.event.client_payload.ref }}
-    - run: |
-        echo Releasing ${{ github.event.client_payload.ref }}
+  release:
+    name: Release $GITHUB_REF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Print info
+        run: |
+          echo GITHUB_REF: $GITHUB_REF
+          echo client_payload: ${{ github.event.client_payload.ref }}
+      - name: Release artifact
+        run: |
+          echo Releasing ${{ github.event.client_payload.ref }}
