@@ -1,0 +1,12 @@
+on:
+  repository_dispatch:
+    types: [trigger-release]
+jobs:
+  name: Release ${{ github.event.client_payload.ref }}
+  steps:
+    - uses: actions/checkout@v2
+    - run: |
+        echo GITHUB_REF: $GITHUB_REF
+        echo client_payload: ${{ github.event.client_payload.ref }}
+    - run: |
+        echo Releasing ${{ github.event.client_payload.ref }}
