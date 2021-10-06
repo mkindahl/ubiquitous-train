@@ -3,7 +3,7 @@ on:
     types: [trigger-release]
 jobs:
   release:
-    name: Release $GITHUB_REF
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
