@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Print Info
+        run: |
+          echo GITHUB_REF: $GITHUB_REF
+          echo Inputs ${{ github.event.inputs }}
+      - name: Release artifact
+        run: |
+          echo Releasing ${{ github.event.inputs.version }}
+        
