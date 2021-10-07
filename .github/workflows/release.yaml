@@ -1,9 +1,15 @@
 on:
+  push:
+    branches: ['main']
   workflow_dispatch:
     inputs:
       version:
         description: 'Version'
         required: true
+      magic:
+        description: 'Version'
+        required: true
+        default: 'more'
 jobs:
   release:
     name: Release
@@ -17,5 +23,5 @@ jobs:
           echo Inputs ${{ github.event.inputs }}
       - name: Release artifact
         run: |
-          echo Releasing ${{ github.event.inputs.version }}
+          echo Releasing ${{ github.event.inputs.version }} with ${{ github.event.inputs.magic }}
         
