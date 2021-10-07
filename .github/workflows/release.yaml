@@ -7,9 +7,8 @@ on:
         description: 'Version'
         required: true
       magic:
-        description: 'Version'
+        description: 'Magic'
         required: true
-        default: 'more'
 jobs:
   release:
     name: Release
@@ -23,5 +22,5 @@ jobs:
           echo Inputs ${{ github.event.inputs }}
       - name: Release artifact
         run: |
-          echo Releasing ${{ github.event.inputs.version }} with ${{ github.event.inputs.magic }}
+          echo Releasing ${{ github.event.inputs.version || '2.4.2' }} with ${{ github.event.inputs.magic || 'more' }}
         
