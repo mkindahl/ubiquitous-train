@@ -1,0 +1,22 @@
+name: Run tests
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+jobs:
+  run_test:
+    name: Run all tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print version
+        run: |
+          echo The version is ${{ inputs.version }}
+      - name: Print Info
+        run: |
+          echo GITHUB_REF: $GITHUB_REF
+          cat <<EOT
+          ${{ toJSON(inputs) }}
+          EOT
