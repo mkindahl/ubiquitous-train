@@ -10,22 +10,30 @@ on:
       magic:
         description: 'Magic'
         required: true
+  workflow_call:
+    inputs:
+      version:
+        description: 'Version'
+        type: string
+        required: true
+      magic:
+        description: 'Magic'
+        type: string
+        required: true
 jobs:
-  test:
-    uses: mkindahl/ubiquitous-train/.github/workflows/test.yaml@v1.0
-    with:
-      version: ${{ github.event.inputs.version }}
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Print Info
         run: |
           echo GITHUB_REF: $GITHUB_REF
-          echo Inputs ${{ github.event.inputs }}
+          echo Inputs
+          cat <<END_OF_JSON
+          ${{ toJSON(github.event.inputs) }}
+          END_OF_JSON
       - name: Release artifact
         run: |
           echo Releasing ${{ github.event.inputs.version || '2.4.2' }} with ${{ github.event.inputs.magic || 'more' }}
